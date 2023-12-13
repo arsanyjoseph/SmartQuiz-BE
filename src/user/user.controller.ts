@@ -1,11 +1,11 @@
-import { Body, Controller, Post } from '@nestjs/common';
-import { UserService } from './user.service';
-import { UserDto } from './dto/user.dto';
+import { Body, Controller, Post } from "@nestjs/common";
+import { UserService } from "./user.service";
+import { UserDto } from "./dto/user.dto";
 
-@Controller('user')
+@Controller("user")
 export class UserController {
   constructor(private readonly userService: UserService) {}
-  @Post('/register')
+  @Post("/register")
   register(@Body() user: UserDto) {
     this.userService.register(user);
   }
