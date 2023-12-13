@@ -1,4 +1,4 @@
-import { UserRoles } from "src/types/enums";
+import { UserRoles } from "src/user/types/enums";
 import {
   Entity,
   Column,
