@@ -8,8 +8,8 @@ import { UserRepository } from "./user.repository";
 import { PasswordHandlerService } from "src/password-handler/password-handler.service";
 
 @Module({
-  imports: [TypeOrmModule.forFeature([User, UserRepository])],
-  providers: [UserService, PasswordHandlerService],
+  imports: [TypeOrmModule.forFeature([User])],
+  providers: [UserService, UserRepository, PasswordHandlerService],
   controllers: [UserController],
 })
 export class UserModule {}
