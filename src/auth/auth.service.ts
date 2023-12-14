@@ -19,7 +19,7 @@ export class AuthService {
   ) {}
 
   async validateUser(authDto: AuthDto) {
-    const user = await this.userRepository.getUserByEmail(authDto.email);
+    const user = await this.userRepository.getUserWithPassword(authDto.email);
     if (!user) {
       throw new HttpException("User not found", 404);
     }
