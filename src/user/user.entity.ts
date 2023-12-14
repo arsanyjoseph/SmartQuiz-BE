@@ -1,4 +1,4 @@
-import { UserRoles } from "src/user/types/enums";
+import { UserRoles } from "src/user/types/user.enum";
 import {
   Entity,
   Column,
@@ -24,7 +24,7 @@ export class User {
   @Column()
   password: string;
 
-  @Column({ enum: UserRoles, default: UserRoles.student })
+  @Column({ enum: UserRoles, default: UserRoles.Student })
   role: string;
 
   @CreateDateColumn({ type: "timestamp" })
