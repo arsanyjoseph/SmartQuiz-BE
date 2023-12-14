@@ -11,5 +11,6 @@ import { PasswordHandlerService } from "src/password-handler/password-handler.se
   imports: [TypeOrmModule.forFeature([User])],
   providers: [UserService, UserRepository, PasswordHandlerService],
   controllers: [UserController],
+  exports: [UserRepository],
 })
 export class UserModule {}
