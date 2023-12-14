@@ -3,7 +3,9 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
 import { User } from "./user.entity";
-import { CreateUserDto } from "./dto/user.dto";
+import { CreateUserDto } from "./dto/createUser.dto";
+import { UpdateUserDto } from "./dto/updateUser.dto";
+import { JwtPayload } from "./types/jwt-payload";
 
 @Injectable()
 export class UserRepository {
@@ -22,5 +24,19 @@ export class UserRepository {
       .addSelect("user.password")
       .where("user.email = :email", { email })
       .getOneOrFail();
+  }
+  async updateUser({
+    email,
+    firstName,
+    lastName,
+    isActive,
+  }: UpdateUserDto & JwtPayload) {
+    const user = await this.getUserByEmail(email);
+    if (user) {
+      user.firstName = firstName;
+      user.lastName = lastName;
+      user.isActive = isActive;
+    }
+    return await this.userRepository.save(user);
   }
 }
