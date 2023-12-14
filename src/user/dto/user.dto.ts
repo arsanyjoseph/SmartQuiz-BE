@@ -5,7 +5,7 @@ import {
   IsString,
   IsStrongPassword,
 } from "class-validator";
-import { UserRoles } from "../types/enums";
+import { UserRoles } from "../types/user.enum";
 
 export class CreateUserDto {
   @IsNotEmpty({ message: "Please Provide First Name" })
