@@ -18,6 +18,9 @@ export class UserRepository {
   async getUserByEmail(email: string) {
     return await this.userRepository.findOneBy({ email });
   }
+  async getUserById(id: number) {
+    return await this.userRepository.findOneOrFail({ where: { id } });
+  }
   async getUserWithPassword(email: string) {
     return await this.userRepository
       .createQueryBuilder("user")
@@ -26,17 +29,21 @@ export class UserRepository {
       .getOneOrFail();
   }
   async updateUser({
-    email,
     firstName,
     lastName,
     isActive,
+    userId,
   }: UpdateUserDto & JwtPayload) {
-    const user = await this.getUserByEmail(email);
+    const user = await this.getUserById(userId);
     if (user) {
       user.firstName = firstName;
       user.lastName = lastName;
       user.isActive = isActive;
     }
     return await this.userRepository.save(user);
+  }
+
+  async softDeleteUser(id: number) {
+    await this.userRepository.softDelete(id);
   }
 }
