@@ -21,4 +21,7 @@ export class UserService {
       password: hash,
     });
   }
+  async getProfile(email: string) {
+    return await this.userRepository.getUserByEmail(email);
+  }
 }
