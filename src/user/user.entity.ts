@@ -32,4 +32,7 @@ export class User {
 
   @UpdateDateColumn({ type: "timestamp" })
   updatedAt: Date;
+
+  @Column({ default: true })
+  isActive: boolean;
 }
