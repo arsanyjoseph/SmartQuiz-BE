@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { BadRequestException, Injectable } from "@nestjs/common";
 
 import { CreateUserDto } from "./dto/user.dto";
 import { UserRepository } from "./user.repository";
@@ -12,6 +12,10 @@ export class UserService {
   ) {}
   async register({ password, ...createUserDto }: CreateUserDto) {
     const hash = await this.passwordHandler.hashPassword(password);
+
+    const user = await this.userRepository.getUserByEmail(createUserDto.email);
+    if (user) throw new BadRequestException("Email already registered");
+
     return await this.userRepository.createUser({
       ...createUserDto,
       password: hash,
