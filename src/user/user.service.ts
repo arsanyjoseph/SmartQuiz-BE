@@ -7,11 +7,14 @@ import { PasswordHandlerService } from "src/password-handler/password-handler.se
 @Injectable()
 export class UserService {
   constructor(
-    private readonly usersRepository: UserRepository,
+    private readonly userRepository: UserRepository,
     private readonly passwordHandler: PasswordHandlerService,
   ) {}
-  async register({ password, ...user }: CreateUserDto) {
+  async register({ password, ...createUserDto }: CreateUserDto) {
     const hash = await this.passwordHandler.hashPassword(password);
-    return await this.usersRepository.createUser({ ...user, password: hash });
+    return await this.userRepository.createUser({
+      ...createUserDto,
+      password: hash,
+    });
   }
 }
