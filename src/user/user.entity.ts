@@ -5,6 +5,7 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  DeleteDateColumn,
 } from "typeorm";
 
 @Entity()
@@ -32,6 +33,9 @@ export class User {
 
   @UpdateDateColumn({ type: "timestamp" })
   updatedAt: Date;
+
+  @DeleteDateColumn({ type: "timestamp" })
+  deletedAt: Date;
 
   @Column({ default: true })
   isActive: boolean;
